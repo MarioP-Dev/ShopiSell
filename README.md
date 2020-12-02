@@ -4,8 +4,8 @@ ShopiSell es un software básico creado para la gestión de clientes, pedidos y 
   `tkinter` : Módulo que ofrece interfaces de usuario y multiples ventanas
   
 ### Desarrolladores:
-  `Samuel Carballo Pacheco`:
-  `Carlos González Fernández`:
-  `Mario Pérez Fernández`: [GitHub](http://github.com/MarioP-Dev)   instagram: @mariopf_02
+  `Samuel Carballo Pacheco`: [GitHub](http://github.com/MarioP-Dev)
+  `Carlos González Fernández`: [GitHub](http://github.com/MarioP-Dev)
+  `Mario Pérez Fernández`: [GitHub](http://github.com/MarioP-Dev)
   
 ###
