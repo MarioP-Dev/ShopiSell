@@ -5,7 +5,9 @@ ShopiSell es un software básico creado para la gestión de clientes, pedidos y 
   
 ### Desarrolladores:
   `Samuel Carballo Pacheco`: [GitHub](http://github.com/MarioP-Dev)
+  
   `Carlos González Fernández`: [GitHub](http://github.com/MarioP-Dev)
+  
   `Mario Pérez Fernández`: [GitHub](http://github.com/MarioP-Dev)
   
-#####Universidad de Oviedo
+###Universidad de Oviedo
