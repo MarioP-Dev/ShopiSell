@@ -5,22 +5,37 @@
 #           - Tkinter: Generación de UI para el software
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 from windows import *
-
+import os.path as path
+import tempfile as temp
 import tkinter as tk
 
-window = tk.Tk()
+availableExtensions= ["Clientes", "Finanzas", "Inventario"]
 
-window.geometry('650x400')
-window.title("Dashboard | ShopiSell")
+def checkExtension(extensionName):
+    if (path.exists(path="extensions/"+extensionName+"_Extension.py")):
+        return True
+    else:
+        return False
 
-tk.Label(window, text="Bienvenido a ShoppiSell", font=("Arial Bold", 40)).grid(column=0, row=0)
-tk.Label(window, text="Software TPV basado en Pythonm utilizando JSON files para operar", font=("Arial", 15)).grid(column=0, row=1)
+main = tk.Tk()
+
+main.geometry('620x400')
+main.title("Dashboard | ShopiSell")
+
+tk.Label(main, text="Bienvenido a ShoppiSell", font=("Arial Bold", 40)).grid(column=0, row=0)
+tk.Label(main, text="Software TPV basado en Python utilizando JSON files para operar", font=("Arial", 15)).grid(column=0, row=1)
+
+tk.Button(main,text='Pedidos', command=openClientes, font=("Arial", 15)).grid(column=0,row=3)
+if checkExtension("Clientes"):
+    tk.Button(main,text='Clientes', command=openClientes, font=("Arial", 15)).grid(column=0,row=2)
+if checkExtension("Finanzas"):
+    tk.Button(main,text='Finanzas', command=openClientes, font=("Arial", 15)).grid(column=0,row=4)
+if checkExtension("Finanzas"):
+    tk.Button(main,text='Inventario', command=openClientes, font=("Arial", 15)).grid(column=0,row=5)
+tk.Button(main,text='Configuración', command=openClientes, font=("Arial", 15)).grid(column=0,row=6)
+
+tk.Label(main, text="Puede descargar las extensiones en nuestro GitHub", font=("Arial", 8)).grid(column=0, row=7)
 
 
-tk.Button(window,text='Clientes', command=openClientes).grid(column=0,row=2)
-tk.Button(window,text='Pedidos', command=openClientes).grid(column=0,row=3)
-tk.Button(window,text='Finanzas', command=openClientes).grid(column=0,row=4)
-tk.Button(window,text='Configuración', command=openClientes).grid(column=0,row=5)
-
-window.mainloop()
+main.mainloop()
 
