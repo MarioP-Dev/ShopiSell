@@ -4,10 +4,12 @@
 #           - JSON: Módulo utilizado para el almacenamiento de la información sustituyendo así a una base de datos, que sería lo comúnmente utilizado
 #           - Tkinter: Generación de UI para el software
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
 from windows import *
 import os.path as path
 import tempfile as temp
 import tkinter as tk
+from extensions import Clientes_Extension as clientes
 
 availableExtensions= ["Clientes", "Finanzas", "Inventario"]
 
@@ -27,7 +29,7 @@ tk.Label(main, text="Software TPV basado en Python utilizando JSON files para op
 
 tk.Button(main,text='Pedidos', command=openClientes, font=("Arial", 15)).grid(column=0,row=3)
 if checkExtension("Clientes"):
-    tk.Button(main,text='Clientes', command=openClientes, font=("Arial", 15)).grid(column=0,row=2)
+    tk.Button(main,text='Clientes', command=clientes.run, font=("Arial", 15)).grid(column=0,row=2)
 if checkExtension("Finanzas"):
     tk.Button(main,text='Finanzas', command=openClientes, font=("Arial", 15)).grid(column=0,row=4)
 if checkExtension("Finanzas"):
