@@ -4,8 +4,17 @@
 #   Extensiones compatibles con esta versión: Clientes, finanzas e inventario
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-from ShopiSell import availableExtensions
+from pathlib import Path
+import importlib
 
-def installExtension(extension):
-    if extension in availableExtensions:
-        print("Existe la extension")
+def loadExtensions():
+    extensions = []
+    p = Path('extensions/')
+    for child in p.iterdir():
+        extensions.append(child)
+    
+    for module in extensions:
+        print(module)
+
+
+loadExtensions()
