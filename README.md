@@ -2,7 +2,8 @@
 ShopiSell es un software básico creado para la gestión de clientes, pedidos y finanzas desarrollado integramente en python.
 ### Módulos utilizados
   `tkinter` : Módulo que ofrece interfaces de usuario y multiples ventanas.
-  `csv`: Módulo para la interpretación de archivos CSV
+
+  `csv`: Módulo para la interpretación de archivos CSV.
   
 ### Desarrolladores:
   `Samuel Carballo Pacheco`: [GitHub](https://github.com/samuelcrb)

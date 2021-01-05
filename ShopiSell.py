@@ -11,9 +11,9 @@ from controllers import Clientes_Controller as clientes
 class app:
     def __init__(self):
 
-        __author__ = 'python para impacientes'
+        __author__ = 'Samuel Carballo Pacheco, Carlos González Fernández, Mario Pérez Fernández'
         __title__= 'ShopiSell'
-        __date__ = '30/12/2020'
+        __date__ = '05/01/2021'
         __version__ = '0.0.1'
         __license__ = 'GNU GPLv3'
 
