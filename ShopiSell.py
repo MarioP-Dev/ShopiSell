@@ -5,8 +5,8 @@
 #           - Tkinter: Generación de UI para el software
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 from tkinter import *
-from extensions import Inventario_Controller as inventario
-from extensions import Clientes_Controller as clientes
+from controllers import Inventario_Controller as inventario
+from controllers import Clientes_Controller as clientes
 
 class app:
     def __init__(self):
