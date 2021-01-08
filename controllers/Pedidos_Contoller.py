@@ -79,4 +79,4 @@ def writeOrders(data):
 
 def searchOrder(id):
     orders = getOrders()
-    print(orders[id])
+    return orders[id]
