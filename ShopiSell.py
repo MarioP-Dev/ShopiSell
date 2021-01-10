@@ -3,24 +3,25 @@
 #       Librerías utilizados:
 #           - CSV: Módulo utilizado para el almacenamiento de la información sustituyendo así a una base de datos, que sería lo comúnmente utilizado
 #           - Tkinter: Generación de UI para el software
-#
-#   https://www.python-course.eu/tkinter_entry_widgets.php
-#   https://sodocumentation.net/es/tkinter/topic/6439/varias-ventanas--widgets-toplevel-
+#           - Tkinter ttk: Mayor colección de widgets para la utilización en tkinter
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 from tkinter import *
 from tkinter import ttk
 from controllers import Inventario_Controller as inventario
 from controllers import Clientes_Controller as clientes
-from controllers import Pedidos_Contoller as pedidos
+from controllers import Pedidos_Controller as pedidos
 
 class ShopiSell:
+    '''
+    Función inicial que se ejecuta cuando se crea la aplicación. Genera la ventana principal del software
+    '''
     def __init__(self, window):
 
-        __author__ = 'Samuel Carballo Pacheco, Carlos González Fernández, Mario Pérez Fernández'
-        __title__= 'ShopiSell'
-        __date__ = '09/01/2020'
-        __version__ = '0.0.1'
-        __license__ = 'GNU GPLv3'
+        self.__author__ = 'Samuel Carballo Pacheco, Carlos González Fernández, Mario Pérez Fernández'
+        self.__title__= 'ShopiSell'
+        self.__date__ = '09/01/2020'
+        self.__version__ = '0.0.1'
+        self.__license__ = 'GNU GPLv3'
 
 
 
@@ -31,7 +32,7 @@ class ShopiSell:
         self.main.title("Dashboard | ShopiSell") # Nombre de la ventana principal
 
         Label(self.main, text="Bienvenido a ShoppiSell", font=("Arial Bold", 40)).grid(column=0, row=0)
-        Label(self.main, text="Software TPV basado en Python utilizando JSON files para operar", font=("Arial", 15)).grid(column=0, row=1)
+        Label(self.main, text="Software TPV en Python utilizando CSV como base de datos", font=("Arial", 15)).grid(column=0, row=1)
 
         Button(self.main,text='Pedidos', command=self.pedidosWnd, font=("Arial", 15)).grid(column=0,row=3)
         Button(self.main,text='Clientes', command=self.opnClientes, font=("Arial", 15)).grid(column=0,row=2)
@@ -39,9 +40,12 @@ class ShopiSell:
         Button(self.main,text='Configuración', font=("Arial", 15)).grid(column=0,row=6)
         Button(self.main,text='Acerca de', command=self.opnAcerca, font=("Arial", 15)).grid(column=0,row=7)
         
-    
+    '''
+    Abre la ventana correspondiente a la sección de pedidos
+    '''
     def pedidosWnd(self):
 
+        ''' Función que devuelve una ventana con la información de un pedido en concreto buscado a través del buscador'''
         def buscarPedido():
             
             aux = Toplevel()
@@ -76,6 +80,7 @@ class ShopiSell:
 
             aux.mainloop()
 
+        ''' Función que elimina un pedido seleccionado '''
         def eliminarPedido():
             try:
                self.tree.item(self.tree.selection())['text']
@@ -86,6 +91,7 @@ class ShopiSell:
             
             getData()
 
+        ''' Obtiene los datos de los pedidos del archivo csv '''
         def getData():
             # Limpiando la tabla para actualizar
             records = self.tree.get_children()
@@ -99,8 +105,10 @@ class ShopiSell:
                 self.tree.insert('', 0, text = idOrder, values = order[3])
                 idOrder = idOrder+1
             #pedidos.searchOrder(int(input("Referencia del pedido")))
-
+        
+        ''' Genera la ventana para editar un pedido en concreto '''
         def orderEdit():
+            ''' Función que guarda los datos modificados de los campos Entry '''
             def save():
                 pedidos.modifyOrder(self.tree.item(self.tree.selection())['text'], cliente.get(), importe.get(), descuentos.get(), total.get())
                 getData()
@@ -144,11 +152,13 @@ class ShopiSell:
 
             aux.mainloop()
 
+        ''' Genera la ventana para crear un pedido '''
         def orderCreate():
             order = pedidos.Pedido()
             aux = Toplevel()
             aux.title("Crear pedido | ShopiSell")
             
+            ''' Actualiza los campos de liquidaciones '''
             def actualizarCampos():
                 importe.delete(0, 'end')
                 total.delete(0, 'end')
@@ -156,7 +166,7 @@ class ShopiSell:
                 importe.insert(0, order.importe)
                 total.insert(0, order.total)
                 dto.insert(0, order.descuento)
-
+            ''' Obtiene los productos de un pedido pasado como parámetro y los inserta en el TreeView '''
             def getOrderProducts(order):
                 records = tree.get_children()
                 for element in records:
@@ -165,7 +175,7 @@ class ShopiSell:
                 for articulo in records:
                     tree.insert('', 0, text = articulo[1], values = articulo[2])
                 
-
+            ''' Función que añade un producto con los datos de los Entry y los limpia '''
             def addProduct():
                 order.añadirArticulo([ref.get(), nombre.get(), int(precio.get())])
                 getOrderProducts(order)
@@ -178,7 +188,7 @@ class ShopiSell:
             cliente = Entry(frame, width= 30)
             cliente.focus()
             cliente.grid(row = 0, column = 1)
-
+            ''' Función que aplica un descuento al pedido '''
             def applyDiscount():
                 order.descuento = int(dto.get())
                 order.actualizarLiquidaciones()
@@ -260,7 +270,9 @@ class ShopiSell:
         getData()
 
         
-
+    '''
+    Abre la ventana correspondiente a la sección de clientes
+    '''
     def opnClientes(self):
         self.clientesWnd = Toplevel(self.main)
         self.clientesWnd.geometry('620x400')
@@ -291,21 +303,26 @@ class ShopiSell:
         menubar.add_cascade(label="Editar", menu=editmenu)
         menubar.add_cascade(label="Ayuda", menu=helpmenu)
 
+
+    '''
+    Abre una ventana con la información del programa, versión y autores
+    '''
     def opnAcerca(self):
         acerca = Toplevel()
         acerca.geometry("320x200")
         acerca.resizable(width=False, height=False)
         acerca.title("Acerca de")
         
-        marco1 = Frame(acerca, relief=RAISED)
-        marco1.pack(side=TOP, fill=BOTH, expand=True)
-        boton1 = Button(marco1, text="Salir", command=acerca.destroy)
-        boton1.pack(side=TOP, padx=10, pady=10)
-        boton1.focus_set()
+        Label(acerca, text="TPV ShopiSell", font=("Arial", 20), anchor=CENTER).pack()
+        Label(acerca, text="Versión "+self.__version__+" | Fecha última actualización: "+self.__date__, font=("Arial", 10), anchor=CENTER).pack()
+        Label(acerca, text="Desarrollado por:", font=("Arial", 14), anchor=CENTER).pack()
+        Label(acerca, text="Samuel Carballo Pacheco", font=("Arial", 13), anchor=CENTER).pack()
+        Label(acerca, text="Carlos González Fernández", font=("Arial", 13), anchor=CENTER).pack()
+        Label(acerca, text="Mario Pérez Fernández", font=("Arial", 13), anchor=CENTER).pack()
+        Button(acerca, text="Cerrar", command=acerca.destroy, anchor=CENTER).pack()
 
         acerca.transient(self.main)
         self.main.wait_window(acerca)
-
 
 
 if __name__ == '__main__':
