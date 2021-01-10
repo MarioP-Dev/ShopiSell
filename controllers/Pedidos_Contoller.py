@@ -11,8 +11,6 @@ class Pedido:
     descuento = 0
     total= 0;
 
-    def __init__(self) -> None:
-        pass
 
     """
     Función encargada añadir un artículo al pedido
@@ -50,9 +48,6 @@ class Pedido:
         writeOrders(data)
 
 
-        
-
-
 def getOrders():
     data = []
     with open('storage/pedidos.csv') as csvarchivo:
@@ -80,3 +75,16 @@ def writeOrders(data):
 def searchOrder(id):
     orders = getOrders()
     return orders[id]
+
+def deleteOrder(id):
+    orders = getOrders()
+    orders.pop(id)
+    writeOrders(orders)
+
+def modifyOrder(id, cliente, importe, descuentos, total):
+    orders = getOrders()
+    orders[id][0] = cliente
+    orders[id][1] = importe
+    orders[id][2] = descuentos
+    orders[id][3] = total
+    writeOrders(orders)
